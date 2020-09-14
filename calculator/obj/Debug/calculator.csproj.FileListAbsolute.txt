@@ -1,0 +1,10 @@
+C:\WebDev\TTS_c#\calculator\calculator\obj\Debug\calculator.csprojAssemblyReference.cache
+C:\WebDev\TTS_c#\calculator\calculator\obj\Debug\calculator.Form1.resources
+C:\WebDev\TTS_c#\calculator\calculator\obj\Debug\calculator.Properties.Resources.resources
+C:\WebDev\TTS_c#\calculator\calculator\obj\Debug\calculator.csproj.GenerateResource.cache
+C:\WebDev\TTS_c#\calculator\calculator\obj\Debug\calculator.csproj.CoreCompileInputs.cache
+C:\WebDev\TTS_c#\calculator\calculator\bin\Debug\calculator.exe.config
+C:\WebDev\TTS_c#\calculator\calculator\bin\Debug\calculator.exe
+C:\WebDev\TTS_c#\calculator\calculator\bin\Debug\calculator.pdb
+C:\WebDev\TTS_c#\calculator\calculator\obj\Debug\calculator.exe
+C:\WebDev\TTS_c#\calculator\calculator\obj\Debug\calculator.pdb
