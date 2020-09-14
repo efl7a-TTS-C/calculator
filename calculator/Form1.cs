@@ -26,6 +26,21 @@ namespace calculator
         {
 
         }
+        private void display(string textToDisplay)
+        {
+            System.Diagnostics.Debug.WriteLine(textToDisplay.Length);
+            if(textToDisplay.Length < 15) 
+            {
+                displayBox.Text = textToDisplay;
+            } else 
+            {
+                string text = Convert.ToDouble(textToDisplay).ToString("G10");
+                System.Diagnostics.Debug.WriteLine("This is after formatting: " + text);
+
+                displayBox.Text = text;
+
+            }
+        }
        
         private void clear_Click(object sender, EventArgs e)
         {
@@ -37,7 +52,7 @@ namespace calculator
                 num1 = String.Empty;
             }
             input = String.Empty;
-            displayBox.Text = input;
+            display(input);
          }
 
         private void neg_Click(object sender, EventArgs e)
@@ -52,7 +67,7 @@ namespace calculator
                 {
                     input = "-" + input;
                 }
-                displayBox.Text = input;
+                display(input);
             }
         }
 
@@ -61,7 +76,7 @@ namespace calculator
             if(!String.IsNullOrEmpty(input))
             {
                 input = (Convert.ToDouble(input) * .01).ToString();
-                displayBox.Text = input;
+                display(input);
             }
         }
 
@@ -75,8 +90,12 @@ namespace calculator
         private void handleNumberClick(object sender, EventArgs e)
         {
             Button current = (Button) sender;
+            if(current.Text == "." && input.Contains("."))
+            {
+                return;
+            }
             input += current.Text;
-            displayBox.Text = input;
+            display(input);
         }
 
         private void handleOperationsClick(object sender, EventArgs e)
@@ -86,7 +105,7 @@ namespace calculator
             {
                 operation = current.Name;
                 num1 = input;
-                displayBox.Text = num1;
+                display(num1);
                 input = String.Empty;
 
             } else
@@ -122,7 +141,7 @@ namespace calculator
             }
             Console.WriteLine(result);
             num1 = result.ToString();
-            displayBox.Text = num1;
+            display(num1);
             input = String.Empty;
             num2 = String.Empty;
             operation = String.Empty;
