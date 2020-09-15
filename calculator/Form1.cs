@@ -12,10 +12,11 @@ namespace CalculatorApp
 {
     public partial class Form1 : Form
     {
-        string input = string.Empty;
-        string num1 = string.Empty;
-        string num2 = string.Empty;
-        string operation = string.Empty;
+        string input;
+        string num1;
+        string num2;
+        string operation;
+        bool toCalculate = false;
         Calculator calculator = new Calculator();
 
         public Form1()
@@ -25,7 +26,7 @@ namespace CalculatorApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            resetForm();
         }
         
         private void resetForm()
@@ -88,8 +89,12 @@ namespace CalculatorApp
 
         private void equals_Click(object sender, EventArgs e)
         {
-            num2 = input;
-            handleComputation();
+            if (toCalculate)
+            {
+                num2 = input;
+                handleComputation();
+            }
+            toCalculate = false;
         }
 
 
@@ -107,15 +112,15 @@ namespace CalculatorApp
         private void handleOperationsClick(object sender, EventArgs e)
         {
             Button current = (Button)sender;
-            if (String.IsNullOrEmpty(operation) && String.IsNullOrEmpty(num1))
+            if (!toCalculate && String.IsNullOrEmpty(num1))
             {
-                operation = current.Name;
                 num1 = input;
                 display(num1);
+                toCalculate = true;
                 input = String.Empty;
 
             }
-            else
+            else if (toCalculate)
             {
                 if (String.IsNullOrEmpty(input))
                 {
@@ -126,8 +131,11 @@ namespace CalculatorApp
                     num2 = input;
                 }
                 handleComputation();
-                operation = current.Name;
+            } else
+            {
+                toCalculate = true;
             }
+            operation = current.Name;
         }
 
         private void handleComputation()
@@ -137,13 +145,12 @@ namespace CalculatorApp
             {
                 display("error");
                 resetForm();
-            } else
+            } 
+            else
             {
+                resetForm();
                 num1 = result;
                 display(num1);
-                input = String.Empty;
-                num2 = String.Empty;
-                operation = String.Empty;
             }
         }
     }
