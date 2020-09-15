@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace calculator
+namespace CalculatorApp
 {
     public partial class Form1 : Form
     {
@@ -16,7 +16,8 @@ namespace calculator
         string num1 = string.Empty;
         string num2 = string.Empty;
         string operation = string.Empty;
-        double result = 0.0;
+        Calculator calculator = new Calculator();
+
         public Form1()
         {
             InitializeComponent();
@@ -26,33 +27,38 @@ namespace calculator
         {
 
         }
+        
+        private void resetForm()
+        {
+            num1 = String.Empty;
+            num2 = String.Empty;
+            operation = String.Empty;
+            input = String.Empty;
+        }
         private void display(string textToDisplay)
         {
-            System.Diagnostics.Debug.WriteLine(textToDisplay.Length);
             if(textToDisplay.Length < 15) 
             {
                 displayBox.Text = textToDisplay;
             } else 
             {
                 string text = Convert.ToDouble(textToDisplay).ToString("G10");
-                System.Diagnostics.Debug.WriteLine("This is after formatting: " + text);
-
                 displayBox.Text = text;
 
             }
         }
-       
+      
         private void clear_Click(object sender, EventArgs e)
         {
             if(!String.IsNullOrEmpty(num2))
             {
                 num2 = String.Empty;
+                display(num1);
             } else
             {
-                num1 = String.Empty;
+                resetForm();
+                display(input);
             }
-            input = String.Empty;
-            display(input);
          }
 
         private void neg_Click(object sender, EventArgs e)
@@ -83,7 +89,10 @@ namespace calculator
         private void equals_Click(object sender, EventArgs e)
         {
             num2 = input;
-            handleComputation();
+            if (!String.IsNullOrEmpty(num1) && !String.IsNullOrEmpty(num2) && !String.IsNullOrEmpty(operation))
+            {
+                handleComputation();
+            }
         }
 
 
@@ -101,7 +110,7 @@ namespace calculator
         private void handleOperationsClick(object sender, EventArgs e)
         {
             Button current = (Button)sender;
-            if (String.IsNullOrEmpty(operation))
+            if (String.IsNullOrEmpty(operation) && String.IsNullOrEmpty(num1))
             {
                 operation = current.Name;
                 num1 = input;
@@ -112,39 +121,28 @@ namespace calculator
             {
                 num2 = input;
                 handleComputation();
-                operation = current.Name;
+                if(displayBox.Text != "error")
+                {
+                    operation = current.Name;
+                }
             }
         }
 
         private void handleComputation()
         {
-            double n1 = Convert.ToDouble(num1);
-            double n2 = Convert.ToDouble(num2);
-            Console.WriteLine(n1.ToString(), n2.ToString());
-            switch(operation)
+            string result = calculator.compute(num1, num2, operation);
+            if(String.IsNullOrEmpty(result))
             {
-                case "add":
-                    result = n1 + n2;
-                    break;
-                case "subtract":
-                    result = n1 - n2;
-                    break;
-                case "multiply":
-                    result = n1 * n2;
-                    break;
-                case "divide":
-                    result = n1 / n2;
-                    break;
-                default:
-                    Console.WriteLine("an error has occurred.");
-                    break;
+                display("error");
+                resetForm();
+            } else
+            {
+                num1 = result;
+                display(num1);
+                input = String.Empty;
+                num2 = String.Empty;
+                operation = String.Empty;
             }
-            Console.WriteLine(result);
-            num1 = result.ToString();
-            display(num1);
-            input = String.Empty;
-            num2 = String.Empty;
-            operation = String.Empty;
         }
     }
 }

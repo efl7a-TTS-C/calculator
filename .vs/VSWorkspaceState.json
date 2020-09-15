@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\calculator"
   ],
-  "SelectedNode": "\\calculator.sln",
+  "SelectedNode": "\\calculator\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }
