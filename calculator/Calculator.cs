@@ -12,6 +12,7 @@ namespace CalculatorApp
         {
             double n1;
             double n2;
+            double result;
 
             try
             {
@@ -27,20 +28,30 @@ namespace CalculatorApp
             switch (operation)
             {
                 case "add":
-                    return (n1 + n2).ToString();
-                    
+                    result = n1 + n2;
+                    break;
                 case "subtract":
-                    return (n1 - n2).ToString();
-
+                    result = n1 - n2;
+                    break;
                 case "multiply":
-                    return (n1 * n2).ToString();
-
+                    result = n1 * n2;
+                    break;
                 case "divide":
-                    return (n1 / n2).ToString();
-
+                    result = n1 / n2;
+                    break;
                 default:
                     return null;
             }
+
+            if(Double.IsNaN(result) || Double.IsInfinity(result))
+            {
+                return null;
+            } 
+            else
+            {
+                return result.ToString();
+            }
+
         }
     }
 }

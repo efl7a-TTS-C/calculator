@@ -47,7 +47,7 @@ namespace CalculatorApp
 
             }
         }
-      
+
         private void clear_Click(object sender, EventArgs e)
         {
             if(!String.IsNullOrEmpty(num2))

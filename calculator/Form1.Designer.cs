@@ -263,6 +263,7 @@
             // 
             this.displayBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.displayBox.Location = new System.Drawing.Point(25, 37);
+            this.displayBox.MaxLength = 20;
             this.displayBox.Name = "displayBox";
             this.displayBox.Size = new System.Drawing.Size(360, 48);
             this.displayBox.TabIndex = 19;
