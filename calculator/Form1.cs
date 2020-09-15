@@ -89,10 +89,7 @@ namespace CalculatorApp
         private void equals_Click(object sender, EventArgs e)
         {
             num2 = input;
-            if (!String.IsNullOrEmpty(num1) && !String.IsNullOrEmpty(num2) && !String.IsNullOrEmpty(operation))
-            {
-                handleComputation();
-            }
+            handleComputation();
         }
 
 
@@ -117,14 +114,19 @@ namespace CalculatorApp
                 display(num1);
                 input = String.Empty;
 
-            } else
+            }
+            else
             {
-                num2 = input;
-                handleComputation();
-                if(displayBox.Text != "error")
+                if (String.IsNullOrEmpty(input))
                 {
-                    operation = current.Name;
+                    num2 = num1;
                 }
+                else
+                {
+                    num2 = input;
+                }
+                handleComputation();
+                operation = current.Name;
             }
         }
 
